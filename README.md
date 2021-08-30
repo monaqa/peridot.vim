@@ -36,7 +36,7 @@ endfunction
 ```
 
 The following is a dot-repeatable motion that jumps to the next location where the specified character appears.
-(Something like `f` motion, which can span lines.)
+(it is like `f` motion, but this one can span lines.)
 
 ```vim
 let s:char = ""
