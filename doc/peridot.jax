@@ -25,7 +25,7 @@ USAGE									*peridot-usage*
 
 >
 	function! s:some_func(ctx)
-		" some procedures you want to make dot-repeatable
+	  " some procedures you want to make dot-repeatable
 	endfunction
 
 	nnoremap <expr> peridot#repeatable_function("\<SID>some_func")
@@ -35,7 +35,7 @@ USAGE									*peridot-usage*
 
 >
 	function! s:some_func(ctx, a, b, c)
-		" some procedures you want to make dot-repeatable
+	  " some procedures you want to make dot-repeatable
 	endfunction
 
 	nnoremap <expr> peridot#repeatable_function("\<SID>some_func", [1, 2, 3])
@@ -54,7 +54,7 @@ peridot#repeatable_function({name}[, {params}])
 		{name} にわたすのは以下のような構造を持つ関数です。
 >
 			function! SomeFunc(ctx, arg1, arg2, ...)
-				" some procedures
+			  " some procedures
 			endfunction
 <
 		`peridot#repeatable_function('SomeFunc', [val1, val2, ...])`とすれば、
