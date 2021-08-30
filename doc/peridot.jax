@@ -1,0 +1,97 @@
+*peridot.txt* 日本語ヘルプ （最終更新：2021/08/13）
+
+自身で定義した関数の評価をドットリピート可能にするプラグインです。
+
+Author: Mogami Shinichi (@monaqa) <mogassy{at}yahoo.co.jp>
+Version: 0.1.0
+License: MIT license
+		<https://github.com/monaqa/peridot.vim/blob/master/LICENSE>
+
+}}}
+
+
+==============================================================================
+CONTENTS								*peridot-contents*
+
+Usage									|peridot-usage|
+Functions								|peridot-functions|
+Examples								|peridot-examples|
+
+
+==============================================================================
+USAGE									*peridot-usage*
+
+以下のように設定します。
+
+>
+	function! s:some_func(ctx)
+		" some procedures you want to make dot-repeatable
+	endfunction
+
+	nnoremap <expr> peridot#repeatable_function("\<SID>some_func")
+<
+
+以下のように引数を渡すこともできます。
+
+>
+	function! s:some_func(ctx, a, b, c)
+		" some procedures you want to make dot-repeatable
+	endfunction
+
+	nnoremap <expr> peridot#repeatable_function("\<SID>some_func", [1, 2, 3])
+<
+
+
+==============================================================================
+FUNCTIONS								*peridot-functions*
+
+										*peridot#repeatable_function()*
+peridot#repeatable_function({name}[, {params}])
+		与えられた文字列 {name} の名前を持つ関数をドットリピート可能な形で呼び
+		出すようなキーマッピングを返します。 <expr> の付いた |nnoremap| の定義
+		中で用いることを想定しています。
+
+		{name} にわたすのは以下のような構造を持つ関数です。
+>
+			function! SomeFunc(ctx, arg1, arg2, ...)
+				" some procedures
+			endfunction
+<
+		`peridot#repeatable_function('SomeFunc', [val1, val2, ...])`とすれば、
+		そのマッピングが呼び出されたとき、`arg1`に`val1`、`arg2`に`val2`が渡さ
+		れた状態で評価されます。またその際、`ctx`は以下のキーを有する辞書とし
+		て渡されます:
+
+			set_count (bool)	呼び出されたときに、カウンタがユーザによって明
+								示的に指定されたかどうか
+			count      (int)	カウンタの値（明示的に指定されなかったときは0）
+			repeated  (bool)	その関数が dot repeat によって呼ばれたかどうか
+
+										*peridot#repeatable_textobj()*
+peridot#repeatable_textobj({name}[, {params}])
+		与えられた文字列 {name} の名前を持つ関数をドットリピート可能な形で呼び
+		出すようなキーマッピングを返します。 <expr> の付いた |onoremap| の定義
+		中で用いることを想定しています。
+
+		{name} にわたす関数の構造は |peridot#repeatable_function| と同一です。
+
+
+==============================================================================
+EXAMPLES								*peridot-examples*
+
+たとえば「カーソルの位置を変えず、カーソルの直前/直後に空行を1行追加する」とい
+う機能をドットリピート可能な形で提供したくなった場合、以下のように書いて実現で
+きます。
+>
+	nnoremap <expr> <Leader>o peridot#repeatable_function("\<SID>append_new_lines", [line(".")])
+	nnoremap <expr> <Leader>O peridot#repeatable_function("\<SID>append_new_lines", [line(".") - 1])
+
+	function! s:append_new_lines(ctx, pos_line)
+	  let n_lines = a:ctx['set_count'] ? a:ctx['count'] : 1
+	  let lines = repeat([""], n_lines)
+	  call append(a:pos_line, lines)
+	endfunction
+<
+
+
+vim:tw=78:fo=tcq2mM:ts=4:ft=help:norl:noet:fdm=marker:fen:
