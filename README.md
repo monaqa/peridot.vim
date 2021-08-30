@@ -61,5 +61,5 @@ endfunction
 
 nnoremap <Leader>f <Cmd>call <SID>next_char()<CR>
 vnoremap <Leader>f <Cmd>call <SID>next_char()<CR>
-onoremap <expr> <Leader>f peridot#repeatable_textobj("\<SID>next_char_operator_pending")
+onoremap <expr> <Leader>f peridot#repeatable_textobj("<SID>next_char_operator_pending")
 ```

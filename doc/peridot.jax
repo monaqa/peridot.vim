@@ -26,7 +26,7 @@ USAGE									*peridot-usage*
 	  " some procedures you want to make dot-repeatable
 	endfunction
 
-	nnoremap <expr> {lhs} peridot#repeatable_function("\<SID>some_func")
+	nnoremap <expr> {lhs} peridot#repeatable_function("<SID>some_func")
 <
 
 以下のように引数を渡すこともできます。
@@ -36,7 +36,7 @@ USAGE									*peridot-usage*
 	  " some procedures you want to make dot-repeatable
 	endfunction
 
-	nnoremap <expr> {lhs} peridot#repeatable_function("\<SID>some_func", [1, 2, 3])
+	nnoremap <expr> {lhs} peridot#repeatable_function("<SID>some_func", [1, 2, 3])
 <
 
 
@@ -81,8 +81,8 @@ EXAMPLES								*peridot-examples*
 う機能をドットリピート可能な形で提供したくなった場合、以下のように書いて実現で
 きます。
 >
-	nnoremap <expr> <Leader>o peridot#repeatable_function("\<SID>append_new_lines", [line(".")])
-	nnoremap <expr> <Leader>O peridot#repeatable_function("\<SID>append_new_lines", [line(".") - 1])
+	nnoremap <expr> <Leader>o peridot#repeatable_function("<SID>append_new_lines", [line(".")])
+	nnoremap <expr> <Leader>O peridot#repeatable_function("<SID>append_new_lines", [line(".") - 1])
 
 	function! s:append_new_lines(ctx, pos_line)
 	  let n_lines = a:ctx['set_count'] ? a:ctx['count'] : 1
