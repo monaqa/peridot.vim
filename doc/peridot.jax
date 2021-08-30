@@ -26,7 +26,7 @@ USAGE									*peridot-usage*
 	  " some procedures you want to make dot-repeatable
 	endfunction
 
-	nnoremap <expr> peridot#repeatable_function("\<SID>some_func")
+	nnoremap <expr> {lhs} peridot#repeatable_function("\<SID>some_func")
 <
 
 以下のように引数を渡すこともできます。
@@ -36,7 +36,7 @@ USAGE									*peridot-usage*
 	  " some procedures you want to make dot-repeatable
 	endfunction
 
-	nnoremap <expr> peridot#repeatable_function("\<SID>some_func", [1, 2, 3])
+	nnoremap <expr> {lhs} peridot#repeatable_function("\<SID>some_func", [1, 2, 3])
 <
 
 
