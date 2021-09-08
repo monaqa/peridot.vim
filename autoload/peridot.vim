@@ -20,14 +20,14 @@ endfunction
 
 function! peridot#_textobj(fname, count, count1) abort
   call peridot#_set_counter(a:count, a:count1)
-  let Func = function(a:fname, [s:context] + s:args)
-  call Func()
+  let l:Func = function(a:fname, [s:context] + s:args)
+  call l:Func()
   let s:context['repeated'] = v:true
 endfunction
 
 function! peridot#_opfunc(type, ...) abort
-  let OpFunc = function(s:opfunc, [s:context] + s:args)
-  call OpFunc()
+  let l:OpFunc = function(s:opfunc, [s:context] + s:args)
+  call l:OpFunc()
   let s:context['repeated'] = v:true
 endfunction
 
