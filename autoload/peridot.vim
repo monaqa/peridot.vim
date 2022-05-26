@@ -42,3 +42,8 @@ function! peridot#_set_counter(count, count1) abort
     let s:context['set_count'] = v:true
   endif
 endfunction
+
+function peridot#_lua_opfunc(type, ...)
+  echo a:000
+  call luaeval("require('peridot')._opfunc(_A)", a:000)
+endfunction
