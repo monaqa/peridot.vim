@@ -48,7 +48,6 @@ function M.set_counter()
 end
 
 function M._opfunc(table)
-    vim.pretty_print(common_ctx)
     opfunc(common_ctx)
     common_ctx.repeated = true
 end
